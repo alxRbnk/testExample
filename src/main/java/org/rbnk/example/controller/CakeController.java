@@ -1,23 +1,22 @@
 package org.rbnk.example.controller;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.rbnk.example.domain.Cake;
 import org.rbnk.example.service.CakeService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/v1")
 public class CakeController {
 
     private final CakeService cakeService;
 
-    @GetMapping("/api/v1/cakes")
+    @GetMapping("/cakes")
     public ResponseEntity<List<Cake>> findAll() {
         List<Cake> cakes = cakeService.getAll();
         return ResponseEntity
@@ -25,4 +24,13 @@ public class CakeController {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(cakes);
     }
+
+    @PostMapping("/add")
+    public ResponseEntity<Cake> create(@RequestBody Cake cake) {
+        cakeService.create(cake);
+        return ResponseEntity
+                .ok()
+                .body(cake);
+    }
+
 }

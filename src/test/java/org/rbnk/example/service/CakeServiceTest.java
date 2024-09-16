@@ -3,6 +3,8 @@ package org.rbnk.example.service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -12,6 +14,7 @@ import org.rbnk.example.repository.impl.FakeRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -86,5 +89,21 @@ class CakeServiceTest {
         long id = 10;
         cakeService.deleteById(id);
         verify(cakeRepository,times(1)).delete(id);
+    }
+
+    static Stream<Cake> provideCakes() {
+        return Stream.of(
+                Cake.builder().id(1L).name("Chocolate Cake").build(),
+                Cake.builder().id(2L).name("Vanilla Cake").build(),
+                Cake.builder().id(3L).name("Strawberry Cake").build()
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideCakes")
+    @DisplayName("Test parameterized create cakes")
+    void testParameterizedCreate(Cake cake) {
+        cakeService.create(cake);
+        verify(cakeRepository, times(1)).save(any(CakeEntity.class));
     }
 }

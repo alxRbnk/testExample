@@ -13,9 +13,13 @@ public class FakeRepository implements CakeRepository {
 
     private final Map<Long, CakeEntity> dataBase = Map.of(
             1L, CakeEntity.builder()
+                    .id(1L)
+                    .name("first")
                     .ingredients(List.of())
                     .build(),
             2L, CakeEntity.builder()
+                    .id(2L)
+                    .name("second")
                     .ingredients(List.of())
                     .build()
     );

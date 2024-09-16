@@ -2,11 +2,13 @@ package org.rbnk.example.repository.impl;
 
 import org.rbnk.example.entity.CakeEntity;
 import org.rbnk.example.repository.CakeRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Repository
 public class FakeRepository implements CakeRepository {
 
     private final Map<Long, CakeEntity> dataBase = Map.of(

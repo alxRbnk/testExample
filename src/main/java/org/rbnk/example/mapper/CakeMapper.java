@@ -10,7 +10,7 @@ import org.rbnk.example.entity.Ingredient;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CakeMapper {
     CakeMapper INSTANCE = Mappers.getMapper(CakeMapper.class);
 

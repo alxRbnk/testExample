@@ -5,10 +5,11 @@ import org.rbnk.example.domain.Cake;
 import org.rbnk.example.entity.CakeEntity;
 import org.rbnk.example.mapper.CakeMapper;
 import org.rbnk.example.repository.CakeRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
+@Service
 @AllArgsConstructor
 public class CakeService {
 
